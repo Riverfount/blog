@@ -1,0 +1,4 @@
+SECRET_KEY=Your_Big_Super_Top_Secret_Key
+DEBUG=False
+ALLOWED_HOSTS=127.0.0.1, localhost
+DATABASE_URL=postgres://postgres:postgres@localhost/blog
