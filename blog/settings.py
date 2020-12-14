@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'collectfast',
     'django.contrib.staticfiles',
     'blog.core.apps',
 ]
@@ -120,11 +121,22 @@ STATIC_ROOT = f'{BASE_DIR}/staticfiles/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = f'{BASE_DIR}/mediafiles/'
 
+COLLECTFAST_ENABLED = False
+
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 
 # Storage Configuration in S3 AWS
 # -------------------------------------------------------------
 if AWS_ACCESS_KEY_ID:
+
+    # Set Up CollectFast
+    # -------------------------------------------------------------
+    COLLECTFAST_ENABLED = True
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
+
+    # Set Up AWS Credentials and mainly constants
+    # -------------------------------------------------------------
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
