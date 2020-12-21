@@ -36,6 +36,6 @@ jobs:
         pytest blog --cov=blog
     - name: Posting Coverage
       env:
-        CODECOV_TOKEN: "584006ee-8055-4af5-baba-787d211c6ddd"
+        CODECOV_TOKEN: ${{ secretes.CODECOV_API_KEY }}
       run: |
         codecov
